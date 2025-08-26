@@ -1,780 +1,386 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haskoop - Yeşilovacık-Silifke Dolmuş Kooperatifi</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #3b82f6;
-            --accent-color: #fbbf24;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --bg-light: #f9fafb;
-            --border-color: #e5e7eb;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            min-height: 100vh;
-        }
-
-        /* Header */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-color);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .contact-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-dark);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-item:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: white;
-            padding: 3rem 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .route-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-light);
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            border: 2px solid var(--accent-color);
-        }
-
-        .route-arrow {
-            color: var(--accent-color);
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            max-width: 1200px;
-            margin: -2rem auto 2rem;
-            padding: 0 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .action-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .action-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--primary-color);
-        }
-
-        .action-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 12px;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .action-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .action-desc {
-            color: var(--text-light);
-        }
-
-        /* Schedule Section */
-        .schedule-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        .schedule-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .schedule-header h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        /* Tab Navigation */
-        .tab-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            overflow: hidden;
-        }
-
-        .tab-buttons {
-            display: flex;
-            background: var(--bg-light);
-            border-bottom: 3px solid var(--border-color);
-        }
-
-        .tab-button {
-            flex: 1;
-            padding: 1.25rem;
-            border: none;
-            background: none;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .tab-button.active {
-            background: white;
-            color: var(--primary-color);
-        }
-
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--primary-color);
-        }
-
-        .tab-button:hover {
-            background: white;
-        }
-
-        .route-info {
-            font-size: 0.875rem;
-            font-weight: normal;
-            opacity: 0.8;
-            display: block;
-            margin-top: 0.25rem;
-        }
-
-        /* Tab Content */
-        .tab-content {
-            display: none;
-            padding: 1.5rem;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Time Grid */
-        .time-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .time-slot {
-            background: var(--bg-light);
-            padding: 1rem;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 2px solid transparent;
-            position: relative;
-        }
-
-        .time-slot:hover {
-            background: white;
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
-        }
-
-        .time-slot.direct {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-color: var(--accent-color);
-        }
-
-        .time-slot.next-departure {
-            background: var(--primary-color);
-            color: white;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
-        }
-
-        .direct-label {
-            position: absolute;
-            top: 0.25rem;
-            right: 0.25rem;
-            background: var(--accent-color);
-            color: var(--text-dark);
-            padding: 0.125rem 0.375rem;
-            border-radius: 4px;
-            font-size: 0.625rem;
-            font-weight: 700;
-        }
-
-        /* Time Period Headers */
-        .time-period {
-            margin-bottom: 2rem;
-        }
-
-        .period-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .period-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        .period-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .period-subtitle {
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-
-        /* Info Section */
-        .info-section {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-
-        .info-card {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border: 2px solid var(--accent-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .info-icon {
-            font-size: 2rem;
-        }
-
-        .info-text {
-            flex: 1;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: white;
-            padding: 3rem 1.5rem;
-            margin-top: 3rem;
-            border-top: 2px solid var(--border-color);
-        }
-
-        .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--text-dark);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-card {
-            background: var(--bg-light);
-            padding: 2rem;
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-
-        .contact-card:hover {
-            background: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .contact-label {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-value {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            text-align: center;
-            padding: 2rem 1.5rem;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .contact-header {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .schedule-container {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-actions {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-in {
-            animation: fadeIn 0.5s ease-out;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Haskoop – Yeşilovacık ⇄ Silifke Dolmuş Hatları</title>
+  <style>
+    /* ====== Temel Renkler ve Değerler ====== */
+    :root {
+      --primary: #2563eb; [cite_start]/* mavi */ [cite: 1, 2]
+      [cite_start]--primary-2: #3b82f6; [cite: 2]
+      --accent: #fbbf24; [cite_start]/* sarı */ [cite: 2, 3]
+      --text: #1f2937; [cite_start]/* koyu gri */ [cite: 3, 4]
+      --muted: #6b7280; [cite_start]/* açık gri */ [cite: 4, 5]
+      --bg: #f7fafc; [cite_start]/* çok açık */ [cite: 5, 6]
+      [cite_start]--card: #ffffff; [cite: 6]
+      [cite_start]--border: #e5e7eb; [cite: 6]
+      [cite_start]--radius: 14px; [cite: 6]
+      [cite_start]--shadow: 0 8px 24px rgba(0,0,0,.08); [cite: 6]
+      --font-lg: clamp(18px, 2.2vw, 20px); [cite_start]/* 30–60 yaş için okunabilir boyut */ [cite: 7]
+      [cite_start]--font-xl: clamp(22px, 3vw, 28px); [cite: 7]
+      [cite_start]--font-2xl: clamp(26px, 4vw, 36px); [cite: 8]
+    }
+
+    * { box-sizing: border-box; [cite_start]} [cite: 8, 9]
+    html, body { height: 100%; [cite_start]} [cite: 9]
+    body {
+      [cite_start]margin: 0; [cite: 9, 10]
+      [cite_start]font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; [cite: 10]
+      [cite_start]color: var(--text); [cite: 10]
+      [cite_start]background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); [cite: 10]
+      [cite_start]line-height: 1.6; [cite: 10, 11]
+    }
+
+    /* ====== Üst Bar ====== */
+    :root { --header-h: 66px; [cite_start]} [cite: 11, 12]
+    .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,1px,1px); white-space: nowrap; border: 0; [cite_start]} [cite: 12, 13]
+
+    header {
+      [cite_start]position: sticky; top: 0; z-index: 50; [cite: 13, 14]
+      [cite_start]background: var(--card); [cite: 14]
+      [cite_start]border-bottom: 1px solid var(--border); [cite: 14]
+      [cite_start]box-shadow: 0 2px 10px rgba(0,0,0,.05); [cite: 14, 15]
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 14px 20px; [cite_start]} [cite: 15, 16]
+    .head { display: flex; align-items: center; justify-content: space-between; gap: 16px; [cite_start]} [cite: 16, 17]
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: var(--font-xl); color: var(--primary); [cite_start]} [cite: 17, 18]
+    .brand-badge { width: 40px; height: 40px; border-radius: 10px; background: var(--primary); display: grid; place-items: center; color: #fff; font-size: 22px; [cite_start]} [cite: 18, 19]
+    .contact a { text-decoration: none; color: var(--text); font-weight: 600; font-size: var(--font-lg); [cite_start]} [cite: 19, 20]
+    .contact a:hover { color: var(--primary); [cite_start]} [cite: 20]
+
+    /* ====== Hero ====== */
+    .hero { background: var(--card); border-bottom: 1px solid var(--border); [cite_start]} [cite: 20, 21]
+    .hero-in { padding: 30px 20px; text-align: center; [cite_start]} [cite: 21, 22]
+    .hero h1 { 
+      [cite_start]margin: 0 0 12px; [cite: 22]
+      [cite_start]font-size: var(--font-2xl); [cite: 22]
+      [cite_start]background: linear-gradient(135deg, var(--primary), var(--primary-2)); [cite: 23]
+      -webkit-background-clip: text; background-clip: text; [cite_start]-webkit-text-fill-color: transparent; [cite: 23]
+    }
+    .route-pill { display: inline-flex; align-items: center; gap: 10px; border: 2px solid var(--accent); border-radius: 999px; padding: 10px 16px; background: #fffdf5; font-weight: 700; [cite_start]} [cite: 23, 25]
+    .today { margin-top: 10px; color: var(--muted); font-size: var(--font-lg); [cite_start]} [cite: 25, 26]
+
+    /* ====== Hızlı Erişim ====== */
+    .quick { margin: 16px auto 28px; padding: 0 20px; max-width: 1200px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; [cite_start]} [cite: 26, 28]
+    .q { background: var(--card); border: 2px solid transparent; border-radius: var(--radius); padding: 18px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,.05); cursor: pointer; text-decoration: none; color: var(--text); [cite_start]} [cite: 28, 29]
+    .q:hover { border-color: var(--primary); box-shadow: var(--shadow); transform: translateY(-2px); [cite_start]} [cite: 29, 30]
+    .q i { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 10px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: #fff; font-size: 26px; [cite_start]} [cite: 30, 32]
+
+    /* ====== Saatler ====== */
+    section { scroll-margin-top: 80px; [cite_start]} [cite: 36, 37]
+    .section { max-width: 1200px; margin: 0 auto; padding: 24px 20px; [cite_start]} [cite: 37, 38]
+    .section h2 { font-size: var(--font-xl); margin: 0 0 14px; [cite_start]} [cite: 38, 39]
+    .card { background: var(--card); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); [cite_start]} [cite: 39, 40]
+    
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 18px; [cite_start]} [cite: 40, 41]
+    @media (max-width: 740px) {
+      .two-col { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; gap: 12px; padding: 12px 12px 16px; [cite_start]} [cite: 41, 42]
+      .panel { flex: 0 0 100%; scroll-snap-align: start; [cite_start]} [cite: 42, 43]
+    }
+    
+    .col { display: flex; flex-direction: column; gap: 14px; [cite_start]} [cite: 45, 46]
+    .col-head { position: sticky; top: 74px; z-index: 5; background: var(--card); border: 1px dashed var(--border); padding: 12px 14px; border-radius: 12px; [cite_start]} [cite: 46, 47]
+    .col-head b { font-size: var(--font-lg); [cite_start]} [cite: 47, 48]
+    .col-head small { color: var(--muted); display: block; [cite_start]} [cite: 48, 49]
+
+    .period { border: 1px solid var(--border); border-radius: 12px; padding: 12px; [cite_start]} [cite: 49, 50]
+    .period h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: var(--font-lg); [cite_start]} [cite: 50, 51]
+    .time-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; [cite_start]} [cite: 51, 62]
+    .time { position: relative; background: #f3f7ff; border: 2px solid transparent; border-radius: 12px; padding: 14px 10px; text-align: center; font-weight: 800; font-size: var(--font-xl); cursor: pointer; min-height: 48px; [cite_start]} [cite: 62, 64]
+    .time:hover { background: #fff; border-color: var(--primary); box-shadow: 0 6px 18px rgba(37,99,235,.15); transform: translateY(-1px); [cite_start]} [cite: 53, 54]
+    .time .tag { display:inline-block; margin-left:8px; padding:2px 6px; border-radius:6px; background: var(--accent); color:#111; font-weight:900; font-size:12px; vertical-align: middle; [cite_start]} [cite: 54, 55]
+    .time.next { background: var(--primary); color: #fff; box-shadow: 0 0 0 0 rgba(37,99,235,.4); animation: pulse 2s infinite; [cite_start]} [cite: 55, 57]
+    [cite_start]@keyframes pulse { 0%{ box-shadow: 0 0 0 0 rgba(37,99,235,.35);} 70%{ box-shadow: 0 0 0 10px rgba(37,99,235,0);} 100%{ box-shadow: 0 0 0 0 rgba(37,99,235,0);} } [cite: 57]
+    .legend { font-size: var(--font-lg); margin-top: 6px; [cite_start]} [cite: 58, 59]
+
+    /* ====== Butonlar ve Kontroller ====== */
+    .btn { border: 1px solid var(--border); background: var(--card); border-radius: 10px; padding: 10px 14px; font-weight: 700; cursor: pointer; [cite_start]} [cite: 77, 78]
+    .routechips .btn[aria-pressed="true"] {
+      [cite_start]border-color: var(--primary); [cite: 61]
+      [cite_start]background: #eef2ff; [cite: 61]
+      outline: 2px solid var(--primary);
+    }
+    .segment { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; [cite_start]} [cite: 59, 60]
+    .segbtn { border: 2px solid var(--border); background: #f8fafc; border-radius: 999px; padding: 10px 12px; font-weight: 800; cursor:pointer; [cite_start]} [cite: 60, 61]
+    .segbtn[aria-pressed="true"] { border-color: var(--primary); background: #eef2ff; [cite_start]} [cite: 61]
+    
+    .time.dimmed {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* ====== Ücretler & İletişim & Alt ====== */
+    .fare-table { width: 100%; border-collapse: collapse; font-size: var(--font-lg); [cite_start]} [cite: 70, 71]
+    .fare-table th, .fare-table td { border: 1px solid var(--border); padding: 12px; text-align: left; [cite_start]} [cite: 71, 72]
+    .fare-table th { background: #fef9c3; [cite_start]} [cite: 72]
+    .fare-note { margin-top: 10px; color: var(--muted); [cite_start]} [cite: 72, 73]
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; [cite_start]} [cite: 73, 74]
+    .contact-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 18px; [cite_start]} [cite: 74, 75]
+    footer { margin-top: 30px; background: #111827; color: #fff; text-align: center; padding: 26px 20px; [cite_start]} [cite: 75, 76]
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon">🚐</div>
-                <span>HASKOOP</span>
-            </div>
-            <div class="contact-header">
-                <a href="tel:+905551234567" class="contact-item">
-                    <span>📞</span>
-                    <span>0555 123 45 67</span>
-                </a>
-            </div>
-        </div>
-    </header>
+  <header>
+    <div class="wrap head">
+      <div class="brand"><span class="brand-badge">🚐</span> HASKOOP</div>
+      <div class="contact"><a href="tel:+905551234567">📞 0555 123 45 67</a></div>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Yeşilovacık - Silifke Dolmuş Hattı</h1>
-        <div class="route-badge">
-            <span>🚐 Yeşilovacık</span>
-            <span class="route-arrow">➔</span>
-            <span>Silifke 🏙️</span>
-        </div>
-    </section>
+  <div class="hero">
+    <div class="wrap hero-in">
+      <h1>Yeşilovacık ⇄ Silifke Dolmuş Hattı</h1>
+      <div class="route-pill">🚐 Yeşilovacık <span>➔</span> Silifke 🏙️</div>
+      <div class="today" id="today"></div>
+    </div>
+  </div>
 
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-        <div class="action-card" onclick="scrollToSchedule()">
-            <div class="action-icon">🕐</div>
-            <div class="action-title">Sefer Saatleri</div>
-            <div class="action-desc">Günlük hareket saatlerimiz</div>
-        </div>
-        <div class="action-card" onclick="scrollToContact()">
-            <div class="action-icon">📞</div>
-            <div class="action-title">İletişim</div>
-            <div class="action-desc">Bize ulaşın</div>
-        </div>
-        <div class="action-card">
-            <div class="action-icon">💳</div>
-            <div class="action-title">Ücret Tarifesi</div>
-            <div class="action-desc">Güncel fiyatlar</div>
+  <nav class="quick" aria-label="Hızlı Erişim">
+    <a class="q" href="#saatler"><i>🕐</i><div><b>Sefer Saatleri</b><div style="color:var(--muted)">Kalkış saatlerini görün</div></div></a>
+    <a class="q" href="#ucretler"><i>💳</i><div><b>Ücret Tarifesi</b><div style="color:var(--muted)">Güncel fiyatları öğrenin</div></div></a>
+    <a class="q" href="#iletisim"><i>📞</i><div><b>İletişim</b><div style="color:var(--muted)">Duraklara ulaşın</div></div></a>
+  </nav>
+
+  <section id="saatler" class="section">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <h2>📅 Günlük Sefer Saatleri</h2>
+        <div class="segment" id="seasonToggle">
+            <button class="segbtn" data-season="yaz" type="button" aria-pressed="true">☀️ Yaz Tarifesi</button>
+            <button class="segbtn" data-season="kis" type="button" aria-pressed="false">❄️ Kış Tarifesi</button>
         </div>
     </div>
-
-    <!-- Schedule Section -->
-    <section class="schedule-section" id="schedule">
-        <div class="schedule-header">
-            <h2>📅 Günlük Sefer Saatleri</h2>
-            <p style="color: var(--text-light);">Tıklayarak detaylı bilgi alabilirsiniz</p>
+    <div class="routechips" id="stopFilter" style="margin:12px 0 10px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="btn" data-stop="Hırmanlı">Hırmanlı</button>
+      <button class="btn" data-stop="Tisan">Tisan <small style="color:#b45309">(Yaz)</small></button>
+      <button class="btn" data-stop="Akdere">Akdere</button>
+      <button class="btn" data-stop="Boğsak">Boğsak</button>
+      <button class="btn" data-stop="Taşucu">Taşucu</button>
+    </div>
+    <div class="card">
+      <div class="two-col" id="twoCol">
         </div>
-        
-        <div class="tab-container">
-            <!-- Tab Buttons -->
-            <div class="tab-buttons">
-                <button class="tab-button active" onclick="showTab('yesilovacik')">
-                    🚐 YEŞİLOVACIK KALKIŞ
-                    <span class="route-info">Silifke'ye Gidiş</span>
-                </button>
-                <button class="tab-button" onclick="showTab('silifke')">
-                    🏙️ SİLİFKE KALKIŞ
-                    <span class="route-info">Yeşilovacık'a Dönüş</span>
-                </button>
-            </div>
+      <div class="wrap" style="padding: 0 18px 18px;">
+        <div class="legend">• <b>Direkt</b> etiketli saatler ara duraklara uğramaz. • Seferlere 5–10 dk esneme payı olabilir.</div>
+      </div>
+    </div>
+  </section>
 
-            <!-- Yeşilovacık Tab Content -->
-            <div class="tab-content active" id="yesilovacik">
-                <!-- Sabah Seferleri -->
-                <div class="time-period">
-                    <div class="period-header">
-                        <div class="period-icon">🌅</div>
-                        <div>
-                            <div class="period-title">Sabah Seferleri</div>
-                            <div class="period-subtitle">06:00 - 12:00 arası</div>
-                        </div>
-                    </div>
-                    <div class="time-grid">
-                        <div class="time-slot">06:20</div>
-                        <div class="time-slot direct">07:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">07:30</div>
-                        <div class="time-slot direct">08:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">08:30</div>
-                        <div class="time-slot direct">09:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot direct">09:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">10:00</div>
-                        <div class="time-slot direct">10:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">11:00</div>
-                        <div class="time-slot direct">11:30<span class="direct-label">DİREKT</span></div>
-                    </div>
-                </div>
+  <section id="ucretler" class="section">
+    <h2>💳 Ücret Tarifesi</h2>
+    <div class="card" style="padding: 18px;">
+      <table class="fare-table" id="fareTable">
+        <thead>
+          <tr><th>Güzergâh</th><th>Tam</th><th>Öğrenci</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="fare-note">Not: Fiyatlar bilgilendirme amaçlıdır. Değişiklik gösterebilir.</div>
+    </div>
+  </section>
 
-                <!-- Öğle ve Akşam Seferleri -->
-                <div class="time-period">
-                    <div class="period-header">
-                        <div class="period-icon">☀️</div>
-                        <div>
-                            <div class="period-title">Öğle ve Akşam Seferleri</div>
-                            <div class="period-subtitle">12:00 - 19:00 arası</div>
-                        </div>
-                    </div>
-                    <div class="time-grid">
-                        <div class="time-slot">12:00</div>
-                        <div class="time-slot direct">12:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">13:00</div>
-                        <div class="time-slot direct">14:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">15:00</div>
-                        <div class="time-slot direct">16:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">17:00</div>
-                        <div class="time-slot direct">17:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">18:00</div>
-                        <div class="time-slot direct">18:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">19:00</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Silifke Tab Content -->
-            <div class="tab-content" id="silifke">
-                <!-- Sabah Seferleri -->
-                <div class="time-period">
-                    <div class="period-header">
-                        <div class="period-icon">🌅</div>
-                        <div>
-                            <div class="period-title">Sabah Seferleri</div>
-                            <div class="period-subtitle">07:30 - 12:00 arası</div>
-                        </div>
-                    </div>
-                    <div class="time-grid">
-                        <div class="time-slot">07:30</div>
-                        <div class="time-slot">08:00</div>
-                        <div class="time-slot">08:50</div>
-                        <div class="time-slot">09:30</div>
-                        <div class="time-slot">10:00</div>
-                        <div class="time-slot direct">10:50<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">11:30</div>
-                    </div>
-                </div>
-
-                <!-- Öğle ve Akşam Seferleri -->
-                <div class="time-period">
-                    <div class="period-header">
-                        <div class="period-icon">☀️</div>
-                        <div>
-                            <div class="period-title">Öğle ve Akşam Seferleri</div>
-                            <div class="period-subtitle">12:00 - 20:00 arası</div>
-                        </div>
-                    </div>
-                    <div class="time-grid">
-                        <div class="time-slot direct">12:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">12:30</div>
-                        <div class="time-slot direct">13:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">13:30</div>
-                        <div class="time-slot direct">14:00<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">14:30</div>
-                        <div class="time-slot direct">15:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">16:30</div>
-                        <div class="time-slot direct">17:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">18:00</div>
-                        <div class="time-slot direct">18:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">19:00</div>
-                        <div class="time-slot direct">19:30<span class="direct-label">DİREKT</span></div>
-                        <div class="time-slot">20:00</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Info Section -->
-    <div class="info-section">
-        <div class="info-card">
-            <span class="info-icon">ℹ️</span>
-            <span class="info-text">
-                <strong>D harfli seferler</strong> mahallelere uğramadan direkt gidiş yapmaktadır. Daha hızlı ulaşım için D seferlerini tercih edebilirsiniz.
-            </span>
+  <section id="iletisim" class="section">
+    <h2>📞 İletişim</h2>
+    <div class="card" style="padding: 18px;">
+        <div class="grid">
+            <div class="contact-card"><b>Telefon</b><div>0555 123 45 67</div></div>
+            <div class="contact-card"><b>Yeşilovacık Durağı</b><div>Merkez Mah. Atatürk Cad.</div></div>
+            <div class="contact-card"><b>Silifke Durağı</b><div>Otogar Yanı</div></div>
         </div>
     </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact">
-        <div class="contact-container">
-            <h2 class="contact-title">İletişim Bilgileri</h2>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📞</div>
-                    <div class="contact-label">Telefon</div>
-                    <div class="contact-value">0555 123 45 67</div>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-label">Yeşilovacık Durağı</div>
-                    <div class="contact-value">Merkez Mah. Atatürk Cad.</div>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">📍</div>
-                    <div class="contact-label">Silifke Durağı</div>
-                    <div class="contact-value">Otogar Yanı</div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>© <span id="year"></span> Haskoop Dolmuş Kooperatifi</footer>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Haskoop Dolmuş Kooperatifi - Tüm hakları saklıdır.</p>
-        <p style="margin-top: 0.5rem; opacity: 0.8;">Güvenli ve konforlu yolculuk için yanınızdayız</p>
-    </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
-    <script>
-        // Smooth scroll functions
-        function scrollToSchedule() {
-            document.getElementById('schedule').scrollIntoView({ behavior: 'smooth' });
+      // ====== VERİ BÖLÜMÜ (Tüm güncellemeler buradan yapılır) ======
+      const timetable = {
+        yaz: { // Yaz tarifesi
+          yesilovacik: {
+            title: '🚐 Yeşilovacık ➜ Silifke',
+            periods: [
+              { icon: '🌅', name: 'Sabah', times: [
+                {t:'06:20'}, {t:'07:00', badge:true}, {t:'07:30'}, {t:'08:00', badge:true}, {t:'08:30'}, {t:'09:00'}, {t:'10:00'}, {t:'11:00'}
+              ]},
+              { icon: '☀️', name: 'Öğle – Akşam', times: [
+                {t:'12:00'}, {t:'13:00', badge:true}, {t:'14:00'}, {t:'15:00', badge:true}, {t:'16:00'}, {t:'17:00', badge:true}, {t:'18:00'}, {t:'19:30', badge:true}
+              ]}
+            ]
+          },
+          silifke: {
+            title: '🏙️ Silifke ➜ Yeşilovacık',
+            periods: [
+              { icon: '🌅', name: 'Sabah', times: [
+                {t:'07:30'}, {t:'08:30', badge:true}, {t:'09:30'}, {t:'10:30', badge:true}, {t:'11:30'}
+              ]},
+              { icon: '☀️', name: 'Öğle – Akşam', times: [
+                {t:'12:30'}, {t:'13:30', badge:true}, {t:'14:30'}, {t:'15:30', badge:true}, {t:'16:30'}, {t:'17:30', badge:true}, {t:'18:30'}, {t:'20:30', badge:true}
+              ]}
+            ]
+          }
+        },
+        kis: { // Kış tarifesi
+          yesilovacik: {
+            title: '🚐 Yeşilovacık ➜ Silifke',
+            periods: [
+              { icon: '🌇', name: 'Sabah', times: [
+                {t:'07:00', badge:true}, {t:'08:00'}, {t:'09:00', badge:true}, {t:'10:30'}, {t:'11:30', badge:true}
+              ]},
+              { icon: '🏙️', name: 'Öğle – Akşam', times: [
+                {t:'13:00'}, {t:'14:30', badge:true}, {t:'16:00'}, {t:'17:30', badge:true}
+              ]}
+            ]
+          },
+          silifke: {
+            title: '🏙️ Silifke ➜ Yeşilovacık',
+            periods: [
+              { icon: '🌇', name: 'Sabah', times: [
+                {t:'08:00'}, {t:'09:30', badge:true}, {t:'11:00'}
+              ]},
+              { icon: '🏙️', name: 'Öğle – Akşam', times: [
+                {t:'12:30'}, {t:'14:00', badge:true}, {t:'15:30'}, {t:'17:00', badge:true}, {t:'18:30'}
+              ]}
+            ]
+          }
         }
+      };
 
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        }
+      const fares = [
+        { route: 'Hırmanlı / Mesa ⇄ Silifke', tam: 120, ogrenci: 110 },
+        { route: 'Yeşilovacık ⇄ Silifke', tam: 100, ogrenci: 90 },
+        { route: 'Akdere ⇄ Silifke', tam: 90, ogrenci: 80 },
+        { route: 'Boğsak ⇄ Silifke', tam: 70, ogrenci: 60 },
+        { route: 'Boğsak ⇄ Taşucu', tam: 50, ogrenci: 40 }
+      ];
+      
+      // ====== UYGULAMA DURUMU (STATE) ======
+      let currentState = {
+        season: 'yaz', // 'yaz' veya 'kis'
+        stopFilter: null // 'Boğsak', 'Akdere' etc.
+      };
 
-        // Tab switching
-        function showTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active from all buttons
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            
-            // Activate the right button
-            event.currentTarget.classList.add('active');
-        }
+      // ====== ELEMENT REFERANSLARI ======
+      const twoCol = document.getElementById('twoCol');
+      const seasonToggle = document.getElementById('seasonToggle');
+      const stopFilterContainer = document.getElementById('stopFilter');
 
-        // Current time highlighter
-        function highlightCurrentTime() {
-            const now = new Date();
-            const currentTime = now.getHours() * 60 + now.getMinutes();
-            
-            const timeSlots = document.querySelectorAll('.time-slot');
-            let nextDeparture = null;
-            let minDiff = Infinity;
-            
-            timeSlots.forEach(slot => {
-                // Remove previous highlighting
-                slot.classList.remove('next-departure');
-                
-                const timeText = slot.textContent.replace(/[^\d:]/g, '');
-                const [hours, minutes] = timeText.split(':').map(Number);
-                const timeInMinutes = hours * 60 + minutes;
-                
-                // Find next departure
-                if (timeInMinutes > currentTime && timeInMinutes - currentTime < minDiff) {
-                    minDiff = timeInMinutes - currentTime;
-                    nextDeparture = slot;
-                }
-            });
-            
-            // Highlight next departure
-            if (nextDeparture && minDiff < 120) { // Within next 2 hours
-                nextDeparture.classList.add('next-departure');
-                nextDeparture.title = 'Sonraki Sefer';
+      // ====== RENDER FONKSİYONLARI ======
+      function renderTimetables() {
+        twoCol.innerHTML = '';
+        const seasonData = timetable[currentState.season];
+        buildColumn(seasonData.yesilovacik);
+        buildColumn(seasonData.silifke);
+        applyHighlights();
+        applyStopFilter();
+      }
+
+      function buildColumn(data) {
+        const col = document.createElement('div');
+        col.className = 'col panel';
+        col.innerHTML = `<div class="col-head"><b>${data.title}</b><small>Sonraki sefer vurgulanır.</small></div>`;
+        data.periods.forEach(p => {
+          const timesHtml = p.times.map(({t, badge}) => `
+            <li class="time" data-badge="${!!badge}" title="${badge ? `${t} – Direkt sefer` : `${t} – Tüm duraklara uğrar`}">
+              <span class="t">${t}</span>
+              ${badge ? '<span class="tag">Direkt</span>' : ''}
+            </li>
+          `).join('');
+          col.innerHTML += `<div class="period"><h3>${p.icon} ${p.name}</h3><ul class="time-list">${timesHtml}</ul></div>`;
+        });
+        twoCol.appendChild(col);
+      }
+
+      function applyHighlights() {
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        document.querySelectorAll('.col.panel').forEach(col => {
+          let nextEl = null;
+          let minDiff = Infinity;
+          col.querySelectorAll('.time').forEach(el => {
+            el.classList.remove('next');
+            const [h, m] = el.querySelector('.t').textContent.split(':').map(Number);
+            const timeMinutes = h * 60 + m;
+            const diff = timeMinutes - currentMinutes;
+            if (diff >= 0 && diff < minDiff) {
+              minDiff = diff;
+              nextEl = el;
             }
-        }
+          });
+          if (nextEl && minDiff <= 120) { // 2 saat içinde ise vurgula
+            nextEl.classList.add('next');
+          }
+        });
+      }
+      
+      function applyStopFilter() {
+        const { stopFilter } = currentState;
+        document.querySelectorAll('.time').forEach(el => {
+          if (!stopFilter) {
+            el.classList.remove('dimmed');
+            return;
+          }
+          const isDirect = el.dataset.badge === 'true';
+          if (isDirect) {
+            el.classList.add('dimmed');
+          } else {
+            el.classList.remove('dimmed');
+          }
+        });
+      }
 
-        // Make time slots clickable
-        function initTimeSlots() {
-            document.querySelectorAll('.time-slot').forEach(slot => {
-                slot.addEventListener('click', function() {
-                    const time = this.textContent.replace(/[^\d:]/g, '');
-                    const isDirect = this.classList.contains('direct');
-                    const message = isDirect ? 
-                        `${time} seferi direkt gidiş yapmaktadır. Mahallelere uğramaz.` :
-                        `${time} seferi tüm duraklara uğrayarak hareket eder.`;
-                    
-                    // Simple alert for now, can be replaced with a modal
-                    alert(message);
-                });
-            });
-        }
+      function buildFares() {
+        const tbody = document.querySelector('#fareTable tbody');
+        tbody.innerHTML = fares.map(f => `
+          <tr>
+            <td>${f.route}</td>
+            <td>${f.tam ? `${f.tam} TL` : '—'}</td>
+            <td>${f.ogrenci ? `${f.ogrenci} TL` : '—'}</td>
+          </tr>
+        `).join('');
+      }
 
-        // Call on load
-        highlightCurrentTime();
-        initTimeSlots();
+      // ====== OLAY DİNLEYİCİLERİ (EVENT LISTENERS) ======
+      seasonToggle.addEventListener('click', (e) => {
+        const btn = e.target.closest('.segbtn');
+        if (!btn) return;
+        currentState.season = btn.dataset.season;
+        seasonToggle.querySelectorAll('.segbtn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        renderTimetables();
+      });
+
+      stopFilterContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn');
+        if (!btn) return;
         
-        // Update every minute
-        setInterval(highlightCurrentTime, 60000);
-    </script>
+        const wasActive = btn.getAttribute('aria-pressed') === 'true';
+        stopFilterContainer.querySelectorAll('.btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+        
+        if (wasActive) {
+          currentState.stopFilter = null;
+        } else {
+          currentState.stopFilter = btn.dataset.stop;
+          btn.setAttribute('aria-pressed', 'true');
+        }
+        applyStopFilter();
+      });
+
+      // ====== İLK ÇALIŞTIRMA ======
+      function init() {
+        const dOpts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('today').textContent = new Intl.DateTimeFormat('tr-TR', dOpts).format(new Date());
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        buildFares();
+        renderTimetables();
+        setInterval(applyHighlights, 60 * 1000);
+      }
+
+      init();
+    });
+  </script>
 </body>
 </html>
