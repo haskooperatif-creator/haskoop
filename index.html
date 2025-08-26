@@ -3,141 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#5b21b6" />
-  <title>Haskoop V3 – Yeşilovacık & Silifke Dolmuş Saatleri</title>
+  <meta name="theme-color" content="#1d4ed8" />
+  <title>Haskoop – Kurumsal Sefer Saatleri Portalı</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ====== V3 TASARIM SİSTEMİ ====== */
+    /* ====== KURUMSAL TASARIM SİSTEMİ (İBB VİZYONU) ====== */
     :root {
-      --primary: #5b21b6;
-      --primary-glow: 0 0 25px 0 rgba(91, 33, 182, 0.6);
-      --accent: #f97316;
-      --bg: #f1f5f9;
-      --card-bg: rgba(255, 255, 255, 0.6);
-      --text: #0f172a;
-      --text-muted: #475569;
-      --border: rgba(203, 213, 225, 0.5);
-      --radius: 16px;
-      --shadow: 0 10px 15px -3px rgba(0,0,0,.05), 0 4px 6px -4px rgba(0,0,0,.05);
+      --primary: #1d4ed8;
+      --primary-glow: 0 0 20px 0 rgba(29, 78, 216, 0.5);
+      --bg: #f0f2f5;
+      --card-bg: #ffffff;
+      --text: #0a1023;
+      --text-muted: #525a76;
+      --border: #dde4ee;
+      --radius: 12px;
+      --shadow: 0 4px 12px 0 rgba(10, 16, 35, 0.05);
       --font-sans: 'Inter', sans-serif;
       --header-h: 70px;
     }
 
     [data-theme="dark"] {
-      --primary: #8b5cf6;
-      --primary-glow: 0 0 25px 0 rgba(139, 92, 246, 0.5);
-      --accent: #fb923c;
-      --bg: #020617;
-      --card-bg: rgba(30, 41, 59, 0.5);
+      --primary: #60a5fa;
+      --primary-glow: 0 0 20px 0 rgba(96, 165, 250, 0.3);
+      --bg: #0a1023;
+      --card-bg: #131b31;
       --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --border: rgba(71, 85, 105, 0.5);
+      --text-muted: #8c9bb6;
+      --border: #2c364c;
     }
 
     /* ====== TEMEL STİLLER & ANİMASYONLAR ====== */
-    *, *::before, *::after { box-sizing: border-box; transition: background-color .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s ease; }
+    *, *::before, *::after { box-sizing: border-box; transition: background-color .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: var(--font-sans);
       color: var(--text);
       background-color: var(--bg);
-      background-image: linear-gradient(180deg, var(--bg) 0%, #e0e7ff 100%);
       line-height: 1.6;
     }
-    [data-theme="dark"] body { background-image: linear-gradient(180deg, var(--bg) 0%, #1e293b 100%); }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ====== ÜST MENÜ (HEADER) ====== */
     header {
       position: sticky; top: 0; z-index: 50;
-      background-color: var(--card-bg);
+      background-color: rgba(255, 255, 255, 0.8);
       border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-    .head { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 22px; letter-spacing: -0.5px; color: var(--text); }
-    .brand-badge { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: grid; place-items: center; color: #fff; font-size: 22px; }
+    [data-theme="dark"] header { background-color: rgba(19, 27, 49, 0.8); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .head { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 20px; }
+    .brand-badge { width: 38px; height: 38px; border-radius: 10px; background-color: var(--primary); display: grid; place-items: center; color: #fff; font-size: 20px; }
     
     .theme-toggle { background: none; border: 0; cursor: pointer; padding: 6px; display: flex; align-items: center; color: var(--text-muted); }
-    .theme-toggle:hover { color: var(--text); }
-    .theme-toggle .sun { display: block; } .theme-toggle .moon { display: none; }
-    [data-theme="dark"] .theme-toggle .sun { display: none; } [data-theme="dark"] .theme-toggle .moon { display: block; }
-    
+    .theme-toggle:hover { color: var(--primary); }
+    .theme-toggle .sun, .theme-toggle .moon { display: none; }
+    [data-theme="light"] .theme-toggle .sun { display: block; }
+    [data-theme="dark"] .theme-toggle .moon { display: block; }
+
     /* ====== ANA İÇERİK ====== */
-    main { padding: 40px 0; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; animation: fadeIn .6s ease both; }
+    main { padding: 48px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; animation: fadeIn .6s ease both; }
     .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 {
-      margin: 0 0 8px; font-size: clamp(36px, 6vw, 52px); font-weight: 800; letter-spacing: -1.5px;
-      background: linear-gradient(135deg, var(--primary), var(--text));
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    [data-theme="dark"] .page-title h1 { background: linear-gradient(135deg, var(--primary), var(--text)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-title h1 { margin: 0 0 8px; font-size: clamp(32px, 5vw, 42px); font-weight: 800; letter-spacing: -1px; }
     .page-title p { color: var(--text-muted); font-size: 18px; margin: 0; }
     
     /* ====== SAATLER KARTI ====== */
-    #timetable-card {
+    .timetable-card {
       background-color: var(--card-bg);
       border-radius: var(--radius);
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      padding: 12px;
+      padding: 16px;
     }
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    
-    .col { display: flex; flex-direction: column; gap: 12px; }
-    .col-head { text-align: center; padding: 12px; border-radius: 12px; background-color: var(--bg); }
-    .col-head b { font-size: clamp(16px, 4vw, 18px); letter-spacing: -0.3px; }
-
-    .period { border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
-    .period h3 { text-align: center; margin: 0 0 12px; font-size: 16px; color: var(--text-muted); font-weight: 600; }
-    .time-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .col-head { text-align: center; padding: 12px; font-weight: 600; font-size: 18px; border-bottom: 1px solid var(--border); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .time-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
     .time {
-      background-color: var(--bg); border: 1px solid var(--border);
-      border-radius: 10px; padding: 12px 8px; text-align: center; font-weight: 700;
-      font-size: clamp(18px, 4vw, 20px); cursor: default;
+      border: 1px solid transparent; border-radius: 8px; padding: 12px; text-align: center;
+      font-weight: 700; font-size: 20px;
     }
-    .time .tag { font-weight: 800; font-size: 11px; color: var(--accent); }
+    .time .tag { font-weight: 500; font-size: 12px; color: var(--text-muted); margin-left: 6px; }
     
     .time.next {
-      background: var(--primary); color: #fff; border-color: var(--primary);
-      box-shadow: var(--primary-glow); transform: scale(1.05);
+      background-color: var(--primary); color: #fff; box-shadow: var(--primary-glow);
     }
-    .time.next .tag { color: #fff; opacity: 0.8; }
+    .time.next .tag { color: rgba(255,255,255,0.8); }
     
     /* ====== BÖLÜMLER (SECTION) ====== */
-    section { scroll-margin-top: calc(var(--header-h) + 40px); margin-top: 60px; animation: fadeIn .6s .2s ease both; }
-    section h2 { font-size: 28px; margin: 0 0 20px; text-align: center; letter-spacing: -0.5px; }
+    section { margin-top: 64px; animation: fadeIn .6s .2s ease both; }
+    section h2 { font-size: 24px; font-weight: 700; margin: 0 0 24px; text-align: center; letter-spacing: -0.5px; }
 
-    .fare-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; font-size: 16px; }
-    .fare-table th { font-weight: 600; text-align: left; padding: 8px 16px; color: var(--text-muted); border-bottom: 2px solid var(--border); }
-    .fare-table td { background-color: var(--card-bg); border: 1px solid var(--border); border-style: solid none; padding: 16px; }
-    .fare-table tr td:first-child { border-left-style: solid; border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
-    .fare-table tr td:last-child { border-right-style: solid; border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
-    .fare-table .price { font-weight: 700; color: var(--primary); }
+    /* Ücretler */
+    .fare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .fare-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+    .fare-card .route { font-weight: 600; margin-bottom: 12px; }
+    .fare-card .prices { display: flex; justify-content: space-between; align-items: baseline; }
+    .fare-card .price { font-size: 28px; font-weight: 800; color: var(--primary); }
+    .fare-card .price-label { font-size: 14px; color: var(--text-muted); }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-    .contact-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; text-align: center; }
-    .contact-card .icon { color: var(--primary); margin-bottom: 12px; }
-    .contact-card b { font-size: 18px; display: block; }
-    .contact-card span { color: var(--text-muted); }
-    
-    footer { margin-top: 60px; border-top: 1px solid var(--border); color: var(--text-muted); text-align: center; padding: 30px 20px; font-size: 14px; }
+    /* Yönetim ve İletişim */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .contact-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+    .contact-card h3 { margin: 0 0 16px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    .contact-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .contact-list li { display: flex; align-items: start; gap: 12px; }
+    .contact-list .icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--text-muted); }
+    .contact-list a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .contact-list a:hover { text-decoration: underline; }
+
+    footer { margin-top: 64px; border-top: 1px solid var(--border); color: var(--text-muted); text-align: center; padding: 32px 24px; font-size: 14px; }
   </style>
 </head>
 <body data-theme="light">
   <header>
     <div class="wrap head">
-      <div class="brand"><span class="brand-badge">🚐</span> Haskoop</div>
+      <div class="brand"><span class="brand-badge">H</span> Haskoop</div>
       <button class="theme-toggle" id="themeToggle" title="Temayı Değiştir">
         <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -148,37 +133,37 @@
   <main>
     <div class="container">
       <div class="page-title">
-        <h1>Dolmuş Sefer Saatleri</h1>
+        <h1>Yeşilovacık ⇄ Silifke Sefer Saatleri</h1>
         <p id="today"></p>
       </div>
 
-      <div id="timetable-card">
+      <div class="timetable-card">
         <div class="two-col" id="twoCol"></div>
       </div>
       
       <section id="ucretler">
         <h2>Ücret Tarifesi</h2>
-        <table class="fare-table" id="fareTable">
-          <thead><tr><th>Güzergâh</th><th style="text-align: right;">Tam</th><th style="text-align: right;">Öğrenci</th></tr></thead>
-          <tbody></tbody>
-        </table>
+        <div class="fare-grid" id="fareGrid"></div>
       </section>
 
       <section id="iletisim">
-        <h2>İletişim Bilgileri</h2>
-        <div class="grid">
-          <div class="contact-card">
-            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
-            <b>Telefon</b><span>0555 123 45 67</span>
-          </div>
-          <div class="contact-card">
-            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
-            <b>Yeşilovacık Durağı</b><span>Merkez Mah. Atatürk Cad.</span>
-          </div>
-          <div class="contact-card">
-            <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
-            <b>Silifke Durağı</b><span>Otogar Yanı</span>
-          </div>
+        <h2>Yönetim ve İletişim</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>İletişim Bilgileri</h3>
+                <ul class="contact-list">
+                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div><div><b>Durak Sabit Hat:</b><br><a href="tel:03247475252">0324 747 5252</a></div></li>
+                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div><b>Adres:</b><br>Yeşilovacık Mah, Akdeniz Cad. Jandarma Karakolu Yanı<br><a href="https://maps.google.com/?q=Yeşilovacık+Mahallesi+Akdeniz+Caddesi" target="_blank">Haritada Göster &rarr;</a></div></li>
+                </ul>
+            </div>
+            <div class="contact-card">
+                <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Yönetim Kurulu</h3>
+                <ul class="contact-list">
+                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><div><b>Başkan - Fikri Bal:</b><br><a href="tel:5072749110">0507 274 9110</a></div></li>
+                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><div><b>2. Başkan - Birol Dursun:</b><br><a href="tel:5385289625">0538 528 9625</a></div></li>
+                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><div><b>Üye - Ali Çelme:</b><br><a href="tel:5394664343">0539 466 4343</a></div></li>
+                </ul>
+            </div>
         </div>
       </section>
     </div>
@@ -188,14 +173,14 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // ====== VERİ BÖLÜMÜ ======
       const timetable = {
-        yesilovacik: { title: '🚐 Yeşilovacık ➜ Silifke', periods: [ { icon: '🌅', name: 'Sabah', times: [ {t:'06:20'}, {t:'07:00', badge:true}, {t:'07:30'}, {t:'08:00', badge:true}, {t:'08:30'}, {t:'09:00'}, {t:'10:00'}, {t:'11:00'} ]}, { icon: '☀️', name: 'Öğle – Akşam', times: [ {t:'12:00'}, {t:'13:00', badge:true}, {t:'14:00'}, {t:'15:00', badge:true}, {t:'16:00'}, {t:'17:00', badge:true}, {t:'18:00'}, {t:'19:30', badge:true} ]} ] },
-        silifke: { title: '🏙️ Silifke ➜ Yeşilovacık', periods: [ { icon: '🌅', name: 'Sabah', times: [ {t:'07:30'}, {t:'08:30', badge:true}, {t:'09:30'}, {t:'10:30', badge:true}, {t:'11:30'} ]}, { icon: '☀️', name: 'Öğle – Akşam', times: [ {t:'12:30'}, {t:'13:30', badge:true}, {t:'14:30'}, {t:'15:30', badge:true}, {t:'16:30'}, {t:'17:30', badge:true}, {t:'18:30'}, {t:'20:30', badge:true} ]} ] }
+        yesilovacik: { title: 'Yeşilovacık Kalkış', times: [ {t:'06:20'}, {t:'07:00', badge:true}, {t:'07:30'}, {t:'08:00', badge:true}, {t:'08:30'}, {t:'09:00'}, {t:'10:00'}, {t:'11:00'}, {t:'12:00'}, {t:'13:00', badge:true}, {t:'14:00'}, {t:'15:00', badge:true}, {t:'16:00'}, {t:'17:00', badge:true}, {t:'18:00'}, {t:'19:30', badge:true} ] },
+        silifke: { title: 'Silifke Kalkış', times: [ {t:'07:30'}, {t:'08:30', badge:true}, {t:'09:30'}, {t:'10:30', badge:true}, {t:'11:30'}, {t:'12:30'}, {t:'13:30', badge:true}, {t:'14:30'}, {t:'15:30', badge:true}, {t:'16:30'}, {t:'17:30', badge:true}, {t:'18:30'}, {t:'20:30', badge:true} ] }
       };
       const fares = [ { route: 'Hırmanlı / Mesa ⇄ Silifke', tam: 120, ogrenci: 110 }, { route: 'Yeşilovacık ⇄ Silifke', tam: 100, ogrenci: 90 }, { route: 'Akdere ⇄ Silifke', tam: 90, ogrenci: 80 }, { route: 'Boğsak ⇄ Silifke', tam: 70, ogrenci: 60 }, { route: 'Boğsak ⇄ Taşucu', tam: 50, ogrenci: 40 } ];
       
       const twoCol = document.getElementById('twoCol');
+      const fareGrid = document.getElementById('fareGrid');
       const themeToggle = document.getElementById('themeToggle');
 
       function renderTimetables() {
@@ -208,12 +193,8 @@
       function buildColumn(data) {
         const col = document.createElement('div');
         col.className = 'col';
-        let colHTML = `<div class="col-head"><b>${data.title}</b></div>`;
-        data.periods.forEach(p => {
-          const timesHtml = p.times.map(({t, badge}) => `<li class="time">${t}${badge ? '<span class="tag">D</span>' : ''}</li>`).join('');
-          colHTML += `<div class="period"><h3>${p.name}</h3><ul class="time-list">${timesHtml}</ul></div>`;
-        });
-        col.innerHTML = colHTML;
+        const timesHtml = data.times.map(({t, badge}) => `<li class="time">${t}${badge ? '<span class="tag">(Direkt)</span>' : ''}</li>`).join('');
+        col.innerHTML = `<div class="col-head">${data.title}</div><ul class="time-list">${timesHtml}</ul>`;
         twoCol.appendChild(col);
       }
 
@@ -225,20 +206,22 @@
             el.classList.remove('next');
             const [h, m] = el.textContent.match(/(\d+):(\d+)/).slice(1).map(Number);
             const diff = (h * 60 + m) - currentMinutes;
-            if (diff >= 0 && diff < minDiff) {
-                minDiff = diff;
-                nextEl = el;
-            }
+            if (diff >= 0 && diff < minDiff) { minDiff = diff; nextEl = el; }
         });
 
-        if (nextEl && minDiff <= 120) {
-            nextEl.classList.add('next');
-        }
+        if (nextEl && minDiff <= 120) nextEl.classList.add('next');
       }
       
       function buildFares() {
-        const tbody = document.querySelector('#fareTable tbody');
-        tbody.innerHTML = fares.map(f => `<tr><td>${f.route}</td><td class="price" style="text-align: right;">${f.tam} TL</td><td class="price" style="text-align: right;">${f.ogrenci} TL</td></tr>`).join('');
+        fareGrid.innerHTML = fares.map(f => `
+          <div class="fare-card">
+            <div class="route">${f.route}</div>
+            <div class="prices">
+              <div><span class="price-label">Öğrenci:</span><br><span class="price">${f.ogrenci} TL</span></div>
+              <div><span class="price-label">Tam:</span><br><span class="price">${f.tam} TL</span></div>
+            </div>
+          </div>
+        `).join('');
       }
 
       function setTheme(theme) {
@@ -247,12 +230,11 @@
       }
 
       themeToggle.addEventListener('click', () => {
-        const newTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
+        setTheme(document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
       });
 
       function init() {
-        const dOpts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dOpts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
         document.getElementById('today').textContent = new Intl.DateTimeFormat('tr-TR', dOpts).format(new Date());
         document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -265,7 +247,6 @@
         renderTimetables();
         setInterval(applyHighlights, 30 * 1000);
       }
-
       init();
     });
   </script>
