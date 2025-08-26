@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haskoop - Yakında</title>
+    <title>Haskoop - Yeşilovacık-Silifke Dolmuş Kooperatifi</title>
     <style>
         * {
             margin: 0;
@@ -11,64 +11,467 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --accent-color: #fbbf24;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .route-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-light);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            border: 2px solid var(--accent-color);
+        }
+
+        .route-arrow {
+            color: var(--accent-color);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            max-width: 1200px;
+            margin: -2rem auto 2rem;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+
+        .action-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .action-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-desc {
+            color: var(--text-light);
+        }
+
+        /* Schedule Section */
+        .schedule-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .schedule-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             overflow: hidden;
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: var(--bg-light);
+            border-bottom: 3px solid var(--border-color);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1.25rem;
+            border: none;
+            background: none;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
             position: relative;
         }
 
-        /* Animated background particles */
-        .particles {
+        .tab-button.active {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
         }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
+        .tab-button:hover {
+            background: white;
         }
 
-        @keyframes float {
-            from {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+        .route-info {
+            font-size: 0.875rem;
+            font-weight: normal;
+            opacity: 0.8;
+            display: block;
+            margin-top: 0.25rem;
         }
 
-        .container {
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Time Grid */
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .time-slot {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 12px;
             text-align: center;
-            z-index: 10;
-            padding: 2rem;
-            max-width: 600px;
-            animation: fadeInUp 1s ease-out;
+            font-size: 1.25rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
         }
 
-        @keyframes fadeInUp {
+        .time-slot:hover {
+            background: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+        }
+
+        .time-slot.direct {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-color: var(--accent-color);
+        }
+
+        .time-slot.next-departure {
+            background: var(--primary-color);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+
+        .direct-label {
+            position: absolute;
+            top: 0.25rem;
+            right: 0.25rem;
+            background: var(--accent-color);
+            color: var(--text-dark);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        /* Time Period Headers */
+        .time-period {
+            margin-bottom: 2rem;
+        }
+
+        .period-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .period-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .period-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .period-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        /* Info Section */
+        .info-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+        }
+
+        .info-text {
+            flex: 1;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+            padding: 3rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .contact-label {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-header {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .schedule-container {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -76,317 +479,302 @@
             }
         }
 
-        .logo {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        .cta-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .email-form {
-            display: flex;
-            gap: 0.5rem;
-            width: 100%;
-            max-width: 400px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .email-input {
-            flex: 1;
-            min-width: 250px;
-            padding: 1rem 1.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .email-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .email-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
-            border-color: white;
-            transform: translateY(-2px);
-        }
-
-        .submit-btn {
-            padding: 1rem 2rem;
-            background: white;
-            color: #667eea;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6mark 25px rgba(0, 0, 0, 0.3);
-            background: #f0f0f0;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px) scale(1.1);
-            border-color: white;
-        }
-
-        .countdown {
-            display: flex;
-            gap: 2rem;
-            margin: 3rem 0;
-            justify-content: center;
-        }
-
-        .countdown-item {
-            text-align: center;
-        }
-
-        .countdown-value {
-            font-size: 3rem;
-            font-weight: bold;
-            line-height: 1;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 1rem;
-            border-radius: 10px;
-            min-width: 80px;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 3rem;
-            }
-            
-            .tagline {
-                font-size: 1.2rem;
-            }
-            
-            .countdown {
-                gap: 1rem;
-            }
-            
-            .countdown-value {
-                font-size: 2rem;
-                min-width: 60px;
-            }
-        }
-
-        .success-message {
-            display: none;
-            padding: 1rem 2rem;
-            background: rgba(76, 175, 80, 0.9);
-            border-radius: 50px;
-            margin-top: 1rem;
+        .animate-in {
             animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="container">
-        <h1 class="logo">HASKOOP</h1>
-        <p class="tagline">Yeni Nesil Çözümler</p>
-        
-        <p class="description">
-            İnovatif teknolojiler ve yaratıcı çözümlerle işinizi bir üst seviyeye taşıyoruz. 
-            Yakında sizlerleyiz!
-        </p>
-
-        <div class="countdown" id="countdown">
-            <div class="countdown-item">
-                <div class="countdown-value" id="days">00</div>
-                <div class="countdown-label">Gün</div>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🚐</div>
+                <span>HASKOOP</span>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-value" id="hours">00</div>
-                <div class="countdown-label">Saat</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-value" id="minutes">00</div>
-                <div class="countdown-label">Dakika</div>
-            </div>
-            <div class="countdown-item">
-                <div class="countdown-value" id="seconds">00</div>
-                <div class="countdown-label">Saniye</div>
+            <div class="contact-header">
+                <a href="tel:+905551234567" class="contact-item">
+                    <span>📞</span>
+                    <span>0555 123 45 67</span>
+                </a>
             </div>
         </div>
+    </header>
 
-        <div class="cta-section">
-            <form class="email-form" id="emailForm">
-                <input 
-                    type="email" 
-                    class="email-input" 
-                    placeholder="E-posta adresiniz" 
-                    required
-                    id="emailInput"
-                >
-                <button type="submit" class="submit-btn">Haberdar Ol</button>
-            </form>
-            <div class="success-message" id="successMessage">
-                ✓ Teşekkürler! E-posta adresiniz kaydedildi.
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Yeşilovacık - Silifke Dolmuş Hattı</h1>
+        <div class="route-badge">
+            <span>🚐 Yeşilovacık</span>
+            <span class="route-arrow">➔</span>
+            <span>Silifke 🏙️</span>
         </div>
+    </section>
 
-        <div class="social-links">
-            <a href="#" class="social-link" aria-label="Twitter">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
-                </svg>
-            </a>
-            <a href="#" class="social-link" aria-label="LinkedIn">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                    <circle cx="4" cy="4" r="2"/>
-                </svg>
-            </a>
-            <a href="#" class="social-link" aria-label="Instagram">
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-            </a>
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <div class="action-card" onclick="scrollToSchedule()">
+            <div class="action-icon">🕐</div>
+            <div class="action-title">Sefer Saatleri</div>
+            <div class="action-desc">Günlük hareket saatlerimiz</div>
+        </div>
+        <div class="action-card" onclick="scrollToContact()">
+            <div class="action-icon">📞</div>
+            <div class="action-title">İletişim</div>
+            <div class="action-desc">Bize ulaşın</div>
+        </div>
+        <div class="action-card">
+            <div class="action-icon">💳</div>
+            <div class="action-title">Ücret Tarifesi</div>
+            <div class="action-desc">Güncel fiyatlar</div>
         </div>
     </div>
 
-    <script>
-        // Particle animation
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
+    <!-- Schedule Section -->
+    <section class="schedule-section" id="schedule">
+        <div class="schedule-header">
+            <h2>📅 Günlük Sefer Saatleri</h2>
+            <p style="color: var(--text-light);">Tıklayarak detaylı bilgi alabilirsiniz</p>
+        </div>
         
-        createParticles();
+        <div class="tab-container">
+            <!-- Tab Buttons -->
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTab('yesilovacik')">
+                    🚐 YEŞİLOVACIK KALKIŞ
+                    <span class="route-info">Silifke'ye Gidiş</span>
+                </button>
+                <button class="tab-button" onclick="showTab('silifke')">
+                    🏙️ SİLİFKE KALKIŞ
+                    <span class="route-info">Yeşilovacık'a Dönüş</span>
+                </button>
+            </div>
 
-        // Countdown timer
-        function updateCountdown() {
-            const launchDate = new Date('2025-01-01T00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = launchDate - now;
+            <!-- Yeşilovacık Tab Content -->
+            <div class="tab-content active" id="yesilovacik">
+                <!-- Sabah Seferleri -->
+                <div class="time-period">
+                    <div class="period-header">
+                        <div class="period-icon">🌅</div>
+                        <div>
+                            <div class="period-title">Sabah Seferleri</div>
+                            <div class="period-subtitle">06:00 - 12:00 arası</div>
+                        </div>
+                    </div>
+                    <div class="time-grid">
+                        <div class="time-slot">06:20</div>
+                        <div class="time-slot direct">07:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">07:30</div>
+                        <div class="time-slot direct">08:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">08:30</div>
+                        <div class="time-slot direct">09:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot direct">09:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">10:00</div>
+                        <div class="time-slot direct">10:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">11:00</div>
+                        <div class="time-slot direct">11:30<span class="direct-label">DİREKT</span></div>
+                    </div>
+                </div>
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                <!-- Öğle ve Akşam Seferleri -->
+                <div class="time-period">
+                    <div class="period-header">
+                        <div class="period-icon">☀️</div>
+                        <div>
+                            <div class="period-title">Öğle ve Akşam Seferleri</div>
+                            <div class="period-subtitle">12:00 - 19:00 arası</div>
+                        </div>
+                    </div>
+                    <div class="time-grid">
+                        <div class="time-slot">12:00</div>
+                        <div class="time-slot direct">12:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">13:00</div>
+                        <div class="time-slot direct">14:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">15:00</div>
+                        <div class="time-slot direct">16:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">17:00</div>
+                        <div class="time-slot direct">17:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">18:00</div>
+                        <div class="time-slot direct">18:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">19:00</div>
+                    </div>
+                </div>
+            </div>
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            <!-- Silifke Tab Content -->
+            <div class="tab-content" id="silifke">
+                <!-- Sabah Seferleri -->
+                <div class="time-period">
+                    <div class="period-header">
+                        <div class="period-icon">🌅</div>
+                        <div>
+                            <div class="period-title">Sabah Seferleri</div>
+                            <div class="period-subtitle">07:30 - 12:00 arası</div>
+                        </div>
+                    </div>
+                    <div class="time-grid">
+                        <div class="time-slot">07:30</div>
+                        <div class="time-slot">08:00</div>
+                        <div class="time-slot">08:50</div>
+                        <div class="time-slot">09:30</div>
+                        <div class="time-slot">10:00</div>
+                        <div class="time-slot direct">10:50<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">11:30</div>
+                    </div>
+                </div>
 
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML = '<h2>Hizmetlerimiz Aktif!</h2>';
+                <!-- Öğle ve Akşam Seferleri -->
+                <div class="time-period">
+                    <div class="period-header">
+                        <div class="period-icon">☀️</div>
+                        <div>
+                            <div class="period-title">Öğle ve Akşam Seferleri</div>
+                            <div class="period-subtitle">12:00 - 20:00 arası</div>
+                        </div>
+                    </div>
+                    <div class="time-grid">
+                        <div class="time-slot direct">12:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">12:30</div>
+                        <div class="time-slot direct">13:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">13:30</div>
+                        <div class="time-slot direct">14:00<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">14:30</div>
+                        <div class="time-slot direct">15:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">16:30</div>
+                        <div class="time-slot direct">17:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">18:00</div>
+                        <div class="time-slot direct">18:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">19:00</div>
+                        <div class="time-slot direct">19:30<span class="direct-label">DİREKT</span></div>
+                        <div class="time-slot">20:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <div class="info-section">
+        <div class="info-card">
+            <span class="info-icon">ℹ️</span>
+            <span class="info-text">
+                <strong>D harfli seferler</strong> mahallelere uğramadan direkt gidiş yapmaktadır. Daha hızlı ulaşım için D seferlerini tercih edebilirsiniz.
+            </span>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title">İletişim Bilgileri</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-label">Telefon</div>
+                    <div class="contact-value">0555 123 45 67</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-label">Yeşilovacık Durağı</div>
+                    <div class="contact-value">Merkez Mah. Atatürk Cad.</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-label">Silifke Durağı</div>
+                    <div class="contact-value">Otogar Yanı</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Haskoop Dolmuş Kooperatifi - Tüm hakları saklıdır.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Güvenli ve konforlu yolculuk için yanınızdayız</p>
+    </footer>
+
+    <script>
+        // Smooth scroll functions
+        function scrollToSchedule() {
+            document.getElementById('schedule').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate the right button
+            event.currentTarget.classList.add('active');
+        }
+
+        // Current time highlighter
+        function highlightCurrentTime() {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            const timeSlots = document.querySelectorAll('.time-slot');
+            let nextDeparture = null;
+            let minDiff = Infinity;
+            
+            timeSlots.forEach(slot => {
+                // Remove previous highlighting
+                slot.classList.remove('next-departure');
+                
+                const timeText = slot.textContent.replace(/[^\d:]/g, '');
+                const [hours, minutes] = timeText.split(':').map(Number);
+                const timeInMinutes = hours * 60 + minutes;
+                
+                // Find next departure
+                if (timeInMinutes > currentTime && timeInMinutes - currentTime < minDiff) {
+                    minDiff = timeInMinutes - currentTime;
+                    nextDeparture = slot;
+                }
+            });
+            
+            // Highlight next departure
+            if (nextDeparture && minDiff < 120) { // Within next 2 hours
+                nextDeparture.classList.add('next-departure');
+                nextDeparture.title = 'Sonraki Sefer';
             }
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        // Make time slots clickable
+        function initTimeSlots() {
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.addEventListener('click', function() {
+                    const time = this.textContent.replace(/[^\d:]/g, '');
+                    const isDirect = this.classList.contains('direct');
+                    const message = isDirect ? 
+                        `${time} seferi direkt gidiş yapmaktadır. Mahallelere uğramaz.` :
+                        `${time} seferi tüm duraklara uğrayarak hareket eder.`;
+                    
+                    // Simple alert for now, can be replaced with a modal
+                    alert(message);
+                });
+            });
+        }
 
-        // Form submission
-        document.getElementById('emailForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('emailInput').value;
-            
-            // Burada normalde e-posta adresini backend'e gönderirsiniz
-            console.log('E-posta kaydedildi:', email);
-            
-            // Success message
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('emailInput').value = '';
-            
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-        });
+        // Call on load
+        highlightCurrentTime();
+        initTimeSlots();
+        
+        // Update every minute
+        setInterval(highlightCurrentTime, 60000);
     </script>
 </body>
 </html>
