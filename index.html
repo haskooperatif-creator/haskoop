@@ -9,16 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ====== KURUMSAL TASARIM SİSTEMİ (İBB VİZYONU) ====== */
     :root {
       --primary: #1d4ed8;
       --primary-glow: 0 0 20px 0 rgba(29, 78, 216, 0.5);
+      --accent: #f97316;
       --bg: #f0f2f5;
       --card-bg: #ffffff;
       --text: #0a1023;
       --text-muted: #525a76;
       --border: #dde4ee;
-      --radius: 12px;
+      --radius: 16px;
       --shadow: 0 4px 12px 0 rgba(10, 16, 35, 0.05);
       --font-sans: 'Inter', sans-serif;
       --header-h: 70px;
@@ -27,6 +27,7 @@
     [data-theme="dark"] {
       --primary: #60a5fa;
       --primary-glow: 0 0 20px 0 rgba(96, 165, 250, 0.3);
+      --accent: #fb923c;
       --bg: #0a1023;
       --card-bg: #131b31;
       --text: #e2e8f0;
@@ -34,7 +35,6 @@
       --border: #2c364c;
     }
 
-    /* ====== TEMEL STİLLER & ANİMASYONLAR ====== */
     *, *::before, *::after { box-sizing: border-box; transition: background-color .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease; }
     html { scroll-behavior: smooth; }
     body {
@@ -45,8 +45,8 @@
       line-height: 1.6;
     }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-bar { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-    /* ====== ÜST MENÜ (HEADER) ====== */
     header {
       position: sticky; top: 0; z-index: 50;
       background-color: rgba(255, 255, 255, 0.8);
@@ -65,40 +65,55 @@
     [data-theme="light"] .theme-toggle .sun { display: block; }
     [data-theme="dark"] .theme-toggle .moon { display: block; }
 
-    /* ====== ANA İÇERİK ====== */
     main { padding: 48px 0; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; animation: fadeIn .6s ease both; }
     .page-title { text-align: center; margin-bottom: 40px; }
     .page-title h1 { margin: 0 0 8px; font-size: clamp(32px, 5vw, 42px); font-weight: 800; letter-spacing: -1px; }
     .page-title p { color: var(--text-muted); font-size: 18px; margin: 0; }
     
-    /* ====== SAATLER KARTI ====== */
-    .timetable-card {
-      background-color: var(--card-bg);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      padding: 16px;
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .col-head { text-align: center; padding: 12px; font-weight: 600; font-size: 18px; border-bottom: 1px solid var(--border); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .time-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    @media (min-width: 768px) {
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+    }
+    .col-head { text-align: center; padding-bottom: 12px; font-weight: 600; font-size: 20px; border-bottom: 2px solid var(--border); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .time-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    
     .time {
-      border: 1px solid transparent; border-radius: 8px; padding: 12px; text-align: center;
-      font-weight: 700; font-size: 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
     }
-    .time .tag { font-weight: 500; font-size: 12px; color: var(--text-muted); margin-left: 6px; }
+    .time-value { font-weight: 700; font-size: 22px; }
+    .time .tag { display: flex; align-items: center; gap: 6px; font-weight: 500; font-size: 14px; color: var(--text-muted); }
     
-    .time.next {
-      background-color: var(--primary); color: #fff; box-shadow: var(--primary-glow);
+    .time.next { border-color: var(--primary); box-shadow: var(--primary-glow); }
+    .time.next::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background-color: var(--primary);
+      animation: pulse-bar 1.5s infinite ease-in-out;
     }
-    .time.next .tag { color: rgba(255,255,255,0.8); }
+    .time.next .time-value, .time.next .tag { color: var(--primary); }
     
-    /* ====== BÖLÜMLER (SECTION) ====== */
     section { margin-top: 64px; animation: fadeIn .6s .2s ease both; }
     section h2 { font-size: 24px; font-weight: 700; margin: 0 0 24px; text-align: center; letter-spacing: -0.5px; }
 
-    /* Ücretler */
     .fare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .fare-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
     .fare-card .route { font-weight: 600; margin-bottom: 12px; }
@@ -106,7 +121,6 @@
     .fare-card .price { font-size: 28px; font-weight: 800; color: var(--primary); }
     .fare-card .price-label { font-size: 14px; color: var(--text-muted); }
 
-    /* Yönetim ve İletişim */
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .contact-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
     .contact-card h3 { margin: 0 0 16px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
@@ -137,9 +151,7 @@
         <p id="today"></p>
       </div>
 
-      <div class="timetable-card">
-        <div class="two-col" id="twoCol"></div>
-      </div>
+      <div class="two-col" id="twoCol"></div>
       
       <section id="ucretler">
         <h2>Ücret Tarifesi</h2>
@@ -153,7 +165,7 @@
                 <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>İletişim Bilgileri</h3>
                 <ul class="contact-list">
                     <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div><div><b>Durak Sabit Hat:</b><br><a href="tel:03247475252">0324 747 5252</a></div></li>
-                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div><b>Adres:</b><br>Yeşilovacık Mah, Akdeniz Cad. Jandarma Karakolu Yanı<br><a href="https://maps.google.com/?q=Yeşilovacık+Mahallesi+Akdeniz+Caddesi" target="_blank">Haritada Göster &rarr;</a></div></li>
+                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div><b>Adres:</b><br>Yeşilovacık Mah, Akdeniz Cad. Jandarma Karakolu Yanı<br><a href="https://www.google.com/maps/search/?api=1&query=Yeşilovacık+Jandarma+Karakol+Komutanlığı" target="_blank">Haritada Göster →</a></div></li>
                 </ul>
             </div>
             <div class="contact-card">
@@ -193,7 +205,12 @@
       function buildColumn(data) {
         const col = document.createElement('div');
         col.className = 'col';
-        const timesHtml = data.times.map(({t, badge}) => `<li class="time">${t}${badge ? '<span class="tag">(Direkt)</span>' : ''}</li>`).join('');
+        const timesHtml = data.times.map(({t, badge}) => `
+          <li class="time">
+            <span class="time-value">${t}</span>
+            ${badge ? '<div class="tag"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>Direkt</div>' : ''}
+          </li>
+        `).join('');
         col.innerHTML = `<div class="col-head">${data.title}</div><ul class="time-list">${timesHtml}</ul>`;
         twoCol.appendChild(col);
       }
@@ -204,7 +221,7 @@
         
         document.querySelectorAll('.time').forEach(el => {
             el.classList.remove('next');
-            const [h, m] = el.textContent.match(/(\d+):(\d+)/).slice(1).map(Number);
+            const [h, m] = el.querySelector('.time-value').textContent.match(/(\d+):(\d+)/).slice(1).map(Number);
             const diff = (h * 60 + m) - currentMinutes;
             if (diff >= 0 && diff < minDiff) { minDiff = diff; nextEl = el; }
         });
@@ -218,7 +235,7 @@
             <div class="route">${f.route}</div>
             <div class="prices">
               <div><span class="price-label">Öğrenci:</span><br><span class="price">${f.ogrenci} TL</span></div>
-              <div><span class="price-label">Tam:</span><br><span class="price">${f.tam} TL</span></div>
+              <div style="text-align: right;"><span class="price-label">Tam:</span><br><span class="price">${f.tam} TL</span></div>
             </div>
           </div>
         `).join('');
