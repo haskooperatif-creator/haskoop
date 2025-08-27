@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF--8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#1d4ed8" />
-  <title>Haskoop – Premium Sefer Saatleri Portalı</title>
+  <meta name="theme-color" content="#0f172a" />
+  <title>Haskoop – Premium Sefer Saatleri</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1d4ed8;
-      --primary-glow: 0 0 25px 0 rgba(29, 78, 216, 0.6);
+      --primary: #2563eb;
+      --primary-glow: 0 0 25px 0 rgba(37, 99, 235, 0.5);
       --bg: #f0f2f5;
       --card-bg: #ffffff;
-      --text: #0a1023;
-      --text-muted: #525a76;
-      --border: #dde4ee;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
       --radius: 16px;
-      --shadow: 0 4px Hızlı Erişimpx 0 rgba(10, 16, 35, 0.05);
+      --shadow: 0 4px 12px 0 rgba(10, 16, 35, 0.05);
       --font-sans: 'Inter', sans-serif;
-      --header-h: 70px;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -31,87 +30,77 @@
       color: var(--text);
       background-color: var(--bg);
       line-height: 1.6;
-      transition: background-color .3s ease, color .3s ease;
     }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes pulse-bar { 0% { transform: scaleY(0.8); opacity: 1; } 50% { transform: scaleY(1); opacity: 0.6; } 100% { transform: scaleY(0.8); opacity: 1; } }
     @keyframes skeleton-pulse { 0% { background-color: #e2e8f0; } 50% { background-color: #f1f5f9; } 100% { background-color: #e2e8f0; } }
 
-    header {
-      position: sticky; top: 0; z-index: 50;
-      background-color: rgba(240, 242, 245, 0.8);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    
+    header { padding: 24px 0; }
+    .brand { display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 700; font-size: 24px; }
+    .brand-badge { width: 42px; height: 42px; border-radius: 12px; background-color: var(--primary); display: grid; place-items: center; color: #fff; font-size: 22px; }
+    
+    main { padding-bottom: 48px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; animation: fadeIn .6s ease both; }
+    .page-title { text-align: center; margin-bottom: 32px; }
+    .page-title h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 36px); font-weight: 800; letter-spacing: -1px; }
+    .page-title p { color: var(--text-muted); font-size: 16px; margin: 0; }
+    
+    .timetable-card {
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 12px;
     }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .head { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 20px; }
-    .brand-badge { width: 38px; height: 38px; border-radius: 10px; background-color: var(--primary); display: grid; place-items: center; color: #fff; font-size: 20px; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
     
-    main { padding: 48px 0; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; animation: fadeIn .6s ease both; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { margin: 0 0 8px; font-size: clamp(32px, 5vw, 42px); font-weight: 800; letter-spacing: -1px; }
-    .page-title p { color: var(--text-muted); font-size: 18px; margin: 0; }
-    
-    .two-col { display: grid; grid-template-columns: 1fr; gap: 40px; }
-    @media (min-width: 768px) { .two-col { grid-template-columns: 1fr 1fr; gap: 24px; } }
-    
-    .col-head { text-align: center; padding-bottom: 12px; font-weight: 600; font-size: 20px; border-bottom: 2px solid var(--border); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .time-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .col-head { text-align: center; padding: 10px; font-weight: 600; font-size: clamp(16px, 4vw, 18px); border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+    .time-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
     
     .time {
       position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center;
-      background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 16px; box-shadow: var(--shadow); opacity: 0; animation: fadeIn 0.5s ease forwards;
+      background-color: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 12px; opacity: 0; animation: fadeIn 0.5s ease forwards;
     }
-    .time-value { font-weight: 700; font-size: 22px; font-feature-settings: 'tnum'; }
-    .time .tag { display: flex; align-items: center; gap: 6px; font-weight: 500; font-size: 14px; color: var(--text-muted); }
+    .time-value { font-weight: 700; font-size: clamp(18px, 4.5vw, 20px); font-feature-settings: 'tnum'; }
+    .time .tag { font-weight: 600; font-size: clamp(11px, 2.5vw, 12px); color: var(--text-muted); }
     
-    .time.next { border-color: var(--primary); box-shadow: var(--primary-glow); transition: all .3s ease; }
+    .time.next {
+      border-color: var(--primary); box-shadow: var(--primary-glow); transition: all .3s ease;
+      background-color: #e0e7ff;
+    }
     .time.next::before {
-      content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 5px; border-radius: 0 4px 4px 0;
+      content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 4px; border-radius: 0 4px 4px 0;
       background-color: var(--primary); animation: pulse-bar 2s infinite ease-in-out;
     }
     .time.next .time-value { color: var(--primary); }
-    
-    .skeleton { height: 63px; background-color: #e2e8f0; border-radius: var(--radius); animation: skeleton-pulse 1.5s infinite ease-in-out; }
 
+    .skeleton { height: 57px; background-color: var(--border); border-radius: 10px; animation: skeleton-pulse 1.5s infinite ease-in-out; }
     .empty-state {
-        background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-        padding: 24px; text-align: center; animation: fadeIn 0.5s ease;
+      background-color: var(--bg); border-radius: 10px; padding: 20px; text-align: center; animation: fadeIn 0.5s ease;
     }
-    .empty-state .icon { color: var(--primary); margin-bottom: 8px; }
-    .empty-state p { margin: 0; font-size: 16px; font-weight: 500; color: var(--text-muted); }
+    .empty-state p { margin: 0; font-size: 15px; font-weight: 500; color: var(--text-muted); }
     .empty-state .next-day-time { font-weight: 700; color: var(--text); }
 
-    section { margin-top: 64px; animation: fadeIn .6s .2s ease both; }
-    section h2 { font-size: 24px; font-weight: 700; margin: 0 0 24px; text-align: center; letter-spacing: -0.5px; }
-
-    .fare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    .fare-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
-    .fare-card .route { font-weight: 600; margin-bottom: 12px; }
-    .fare-card .prices { display: flex; justify-content: space-between; align-items: baseline; }
-    .fare-card .price { font-size: 28px; font-weight: 800; color: var(--primary); }
-    .fare-card .price-label { font-size: 14px; color: var(--text-muted); }
-
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-    .contact-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
-    .contact-card h3 { margin: 0 0 16px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
-    .contact-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-    .contact-list li { display: flex; align-items: start; gap: 12px; }
-    .contact-list .icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; color: var(--text-muted); }
-    .contact-list a { color: var(--primary); text-decoration: none; font-weight: 500; }
-    .contact-list a:hover { text-decoration: underline; }
-
-    footer { margin-top: 64px; border-top: 1px solid var(--border); color: var(--text-muted); text-align: center; padding: 32px 24px; font-size: 14px; }
+    footer {
+      text-align: center; padding-top: 32px; margin-top: 48px;
+      border-top: 1px solid var(--border); font-size: 14px; color: var(--text-muted);
+    }
+    footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap head">
-      <div class="brand"><span class="brand-badge">H</span> Haskoop</div>
+    <div class="wrap">
+        <div class="brand"><span class="brand-badge">H</span> Haskoop</div>
     </div>
   </header>
 
@@ -119,65 +108,53 @@
     <div class="container">
       <div class="page-title">
         <h1>Yeşilovacık ⇄ Silifke Sefer Saatleri</h1>
-        <p id="today">27 Ağustos 2025 Çarşamba</p>
+        <p id="today"></p>
       </div>
 
-      <div class="two-col" id="twoCol">
-        <div class="col" id="col-yesilovacik">
-          <div class="col-head">Yeşilovacık Kalkış</div>
-          <ul class="time-list">
-             <li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>
-          </ul>
-        </div>
-        <div class="col" id="col-silifke">
-          <div class="col-head">Silifke Kalkış</div>
-          <ul class="time-list">
-            <li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>
-          </ul>
+      <div class="timetable-card">
+        <div class="two-col">
+          <div class="col" id="col-yesilovacik">
+            <div class="col-head">Yeşilovacık Kalkış</div>
+            <ul class="time-list">
+               <li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>
+            </ul>
+          </div>
+          <div class="col" id="col-silifke">
+            <div class="col-head">Silifke Kalkış</div>
+            <ul class="time-list">
+              <li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>
+            </ul>
+          </div>
         </div>
       </div>
-      
-      <section id="ucretler">
-        <h2>Ücret Tarifesi</h2>
-        <div class="fare-grid" id="fareGrid"></div>
-      </section>
-
-      <section id="iletisim">
-        <h2>Yönetim ve İletişim</h2>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>İletişim Bilgileri</h3>
-                <ul class="contact-list">
-                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div><div><b>Durak Sabit Hat:</b><br><a href="tel:03247475252">0324 747 5252</a></div></li>
-                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div><b>Adres:</b><br>Yeşilovacık Mah, Akdeniz Cad. Jandarma Karakolu Yanı<br><a href="http://googleusercontent.com/maps.google.com/2" target="_blank">Haritada Göster →</a></div></li>
-                </ul>
-            </div>
-            <div class="contact-card">
-                <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>Yönetim Kurulu</h3>
-                <ul class="contact-list">
-                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><div><b>Başkan - Fikri Bal:</b><br><a href="tel:5072749110">0507 274 9110</a></div></li>
-                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><div><b>2. Başkan - Birol Dursun:</b><br><a href="tel:5385289625">0538 528 9625</a></div></li>
-                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div><div><b>Üye - Ali Çelme:</b><br><a href="tel:5394664343">0539 466 4343</a></div></li>
-                </ul>
-            </div>
-        </div>
-      </section>
     </div>
   </main>
   
-  <footer>Haskoop Dolmuş Kooperatifi © <span id="year"></span></footer>
+  <footer class="wrap">
+      Kooperatif Tel: <a href="tel:05551234567">0555 123 45 67</a><br>
+      © <span id="year"></span> Haskoop Dolmuş Kooperatifi
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Veriler, sağlanan haskoop.txt dosyasından alınmıştır.
       const timetable = {
-        yesilovacik: { title: 'Yeşilovacık Kalkış', times: [ {t:'06:20'}, {t:'07:00', badge:true}, {t:'07:30'}, {t:'08:00', badge:true}, {t:'08:30'}, {t:'09:00'}, {t:'10:00'}, {t:'11:00'}, {t:'12:00'}, {t:'13:00', badge:true}, {t:'14:00'}, {t:'15:00', badge:true}, {t:'16:00'}, {t:'17:00', badge:true}, {t:'18:00'}, {t:'19:30', badge:true} ] },
-        silifke: { title: 'Silifke Kalkış', times: [ {t:'07:30'}, {t:'08:30', badge:true}, {t:'09:30'}, {t:'10:30', badge:true}, {t:'11:30'}, {t:'12:30'}, {t:'13:30', badge:true}, {t:'14:30'}, {t:'15:30', badge:true}, {t:'16:30'}, {t:'17:30', badge:true}, {t:'18:30'}, {t:'20:30', badge:true} ] }
+        yesilovacik: {
+          times: [
+            {t:'06:20'}, {t:'07:00', badge:true}, {t:'07:30'}, {t:'08:00', badge:true}, {t:'08:30'}, {t:'09:00', badge:true}, {t:'09:30', badge:true}, {t:'10:00'}, {t:'10:30', badge:true}, {t:'11:00'}, {t:'11:30', badge:true},
+            {t:'12:00'}, {t:'12:30'}, {t:'13:00', badge:true}, {t:'13:30', badge:true}, {t:'14:00', badge:true}, {t:'14:30'}, {t:'15:00', badge:true}, {t:'15:40', badge:true}, {t:'16:20', badge:true}, {t:'17:00'}, {t:'17:40', badge:true}, {t:'18:20', badge:true}, {t:'19:30', badge:true}
+          ]
+        },
+        silifke: {
+          times: [
+            {t:'07:30'}, {t:'08:10'}, {t:'08:50'}, {t:'09:30'}, {t:'10:10'}, {t:'10:50', badge:true}, {t:'11:30'},
+            {t:'12:00', badge:true}, {t:'12:30'}, {t:'13:00', badge:true}, {t:'13:30'}, {t:'14:00', badge:true}, {t:'14:30'}, {t:'15:00', badge:true}, {t:'15:30'}, {t:'16:00', badge:true}, {t:'16:30'}, {t:'17:00', badge:true}, {t:'17:30'}, {t:'18:00', badge:true}, {t:'18:30'}, {t:'19:00', badge:true}, {t:'19:30'}, {t:'20:30'}
+          ]
+        }
       };
-      const fares = [ { route: 'Hırmanlı / Mesa ⇄ Silifke', tam: 120, ogrenci: 110 }, { route: 'Yeşilovacık ⇄ Silifke', tam: 100, ogrenci: 90 }, { route: 'Akdere ⇄ Silifke', tam: 90, ogrenci: 80 }, { route: 'Boğsak ⇄ Silifke', tam: 70, ogrenci: 60 }, { route: 'Boğsak ⇄ Taşucu', tam: 50, ogrenci: 40 } ];
       
       const colYesilovacik = document.querySelector('#col-yesilovacik .time-list');
       const colSilifke = document.querySelector('#col-silifke .time-list');
-      const fareGrid = document.getElementById('fareGrid');
 
       function renderTimetables() {
         buildColumn(timetable.yesilovacik, colYesilovacik);
@@ -186,35 +163,25 @@
       }
 
       function buildColumn(data, targetElement) {
-        targetElement.innerHTML = ''; // Önce iskeleti temizle
+        targetElement.innerHTML = ''; // İskeleti temizle
         const timesHtml = data.times.map(({t, badge}, index) => `
-          <li class="time" style="animation-delay: ${index * 50}ms">
+          <li class="time" style="animation-delay: ${index * 40}ms">
             <span class="time-value">${t}</span>
-            ${badge ? '<div class="tag"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>Direkt</div>' : ''}
+            ${badge ? '<span class="tag">Direkt</span>' : ''}
           </li>
         `).join('');
         targetElement.innerHTML = timesHtml;
       }
 
       function applyHighlights() {
-        const now = new Date();
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const currentMinutes = new Date().getHours() * 60 + new Date().getMinutes();
         let nextEl = null;
         let minDiff = Infinity;
-        let firstTripToday = null;
-        let firstTripTime = Infinity;
 
         document.querySelectorAll('.time').forEach(el => {
             el.classList.remove('next');
             const [h, m] = el.querySelector('.time-value').textContent.match(/(\d+):(\d+)/).slice(1).map(Number);
-            const timeInMinutes = h * 60 + m;
-            
-            if (timeInMinutes < firstTripTime) {
-                firstTripTime = timeInMinutes;
-                firstTripToday = el.querySelector('.time-value').textContent;
-            }
-
-            const diff = timeInMinutes - currentMinutes;
+            const diff = (h * 60 + m) - currentMinutes;
             if (diff >= 0 && diff < minDiff) {
                 minDiff = diff;
                 nextEl = el;
@@ -224,9 +191,7 @@
         if (nextEl && minDiff <= 120) {
             nextEl.classList.add('next');
         } else if (!nextEl) {
-            // Günün tüm seferleri bitti.
             const emptyStateHTML = `<div class="empty-state">
-                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><moon x="12" y="12" r="10"></moon><path d="M12 2L12 6"></path><path d="M12 18L12 22"></path><path d="M4.92993 4.92993L7.75993 7.75993"></path><path d="M16.2402 16.2402L19.0702 19.0702"></path><path d="M2 12L6 12"></path><path d="M18 12L22 12"></path><path d="M4.92993 19.0702L7.75993 16.2402"></path><path d="M16.2402 7.75993L19.0702 4.92993"></path></svg></div>
                 <p>Bugünlük seferler tamamlanmıştır.<br>Yarın ilk sefer: <span class="next-day-time">${timetable.yesilovacik.times[0].t}</span></p>
             </div>`;
             colYesilovacik.innerHTML = emptyStateHTML;
@@ -234,25 +199,11 @@
         }
       }
       
-      function buildFares() {
-        fareGrid.innerHTML = fares.map(f => `
-          <div class="fare-card">
-            <div class="route">${f.route}</div>
-            <div class="prices">
-              <div><span class="price-label">Öğrenci:</span><br><span class="price">${f.ogrenci} TL</span></div>
-              <div style="text-align: right;"><span class="price-label">Tam:</span><br><span class="price">${f.tam} TL</span></div>
-            </div>
-          </div>
-        `).join('');
-      }
-
       function init() {
         const dOpts = { weekday: 'long', day: 'numeric', month: 'long' };
         document.getElementById('today').textContent = new Intl.DateTimeFormat('tr-TR', dOpts).format(new Date());
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        buildFares();
-        // İskelet animasyonunu göstermek için küçük bir gecikme sonrası gerçek veriyi yükle
         setTimeout(() => {
           renderTimetables();
           setInterval(applyHighlights, 30 * 1000);
