@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF--8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#1d4ed8" />
-  <title>Haskoop – Kurumsal Sefer Saatleri Portalı</title>
+  <title>Haskoop – Premium Sefer Saatleri Portalı</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #1d4ed8;
-      --primary-glow: 0 0 20px 0 rgba(29, 78, 216, 0.5);
-      --accent: #f97316;
+      --primary-glow: 0 0 25px 0 rgba(29, 78, 216, 0.6);
       --bg: #f0f2f5;
       --card-bg: #ffffff;
       --text: #0a1023;
       --text-muted: #525a76;
       --border: #dde4ee;
       --radius: 16px;
-      --shadow: 0 4px 12px 0 rgba(10, 16, 35, 0.05);
+      --shadow: 0 4px Hızlı Erişimpx 0 rgba(10, 16, 35, 0.05);
       --font-sans: 'Inter', sans-serif;
       --header-h: 70px;
     }
 
-    [data-theme="dark"] {
-      --primary: #60a5fa;
-      --primary-glow: 0 0 20px 0 rgba(96, 165, 250, 0.3);
-      --accent: #fb923c;
-      --bg: #0a1023;
-      --card-bg: #131b31;
-      --text: #e2e8f0;
-      --text-muted: #8c9bb6;
-      --border: #2c364c;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; transition: background-color .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease; }
+    *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
@@ -43,74 +31,61 @@
       color: var(--text);
       background-color: var(--bg);
       line-height: 1.6;
+      transition: background-color .3s ease, color .3s ease;
     }
+
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse-bar { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+    @keyframes pulse-bar { 0% { transform: scaleY(0.8); opacity: 1; } 50% { transform: scaleY(1); opacity: 0.6; } 100% { transform: scaleY(0.8); opacity: 1; } }
+    @keyframes skeleton-pulse { 0% { background-color: #e2e8f0; } 50% { background-color: #f1f5f9; } 100% { background-color: #e2e8f0; } }
 
     header {
       position: sticky; top: 0; z-index: 50;
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(240, 242, 245, 0.8);
       border-bottom: 1px solid var(--border);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     }
-    [data-theme="dark"] header { background-color: rgba(19, 27, 49, 0.8); }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     .head { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
     .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 20px; }
     .brand-badge { width: 38px; height: 38px; border-radius: 10px; background-color: var(--primary); display: grid; place-items: center; color: #fff; font-size: 20px; }
     
-    .theme-toggle { background: none; border: 0; cursor: pointer; padding: 6px; display: flex; align-items: center; color: var(--text-muted); }
-    .theme-toggle:hover { color: var(--primary); }
-    .theme-toggle .sun, .theme-toggle .moon { display: none; }
-    [data-theme="light"] .theme-toggle .sun { display: block; }
-    [data-theme="dark"] .theme-toggle .moon { display: block; }
-
     main { padding: 48px 0; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; animation: fadeIn .6s ease both; }
     .page-title { text-align: center; margin-bottom: 40px; }
     .page-title h1 { margin: 0 0 8px; font-size: clamp(32px, 5vw, 42px); font-weight: 800; letter-spacing: -1px; }
     .page-title p { color: var(--text-muted); font-size: 18px; margin: 0; }
     
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    @media (min-width: 768px) {
-      .two-col {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-    }
+    .two-col { display: grid; grid-template-columns: 1fr; gap: 40px; }
+    @media (min-width: 768px) { .two-col { grid-template-columns: 1fr 1fr; gap: 24px; } }
+    
     .col-head { text-align: center; padding-bottom: 12px; font-weight: 600; font-size: 20px; border-bottom: 2px solid var(--border); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
     .time-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
     
     .time {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: var(--shadow);
+      position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center;
+      background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 16px; box-shadow: var(--shadow); opacity: 0; animation: fadeIn 0.5s ease forwards;
     }
-    .time-value { font-weight: 700; font-size: 22px; }
+    .time-value { font-weight: 700; font-size: 22px; font-feature-settings: 'tnum'; }
     .time .tag { display: flex; align-items: center; gap: 6px; font-weight: 500; font-size: 14px; color: var(--text-muted); }
     
-    .time.next { border-color: var(--primary); box-shadow: var(--primary-glow); }
+    .time.next { border-color: var(--primary); box-shadow: var(--primary-glow); transition: all .3s ease; }
     .time.next::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 5px;
-      background-color: var(--primary);
-      animation: pulse-bar 1.5s infinite ease-in-out;
+      content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 5px; border-radius: 0 4px 4px 0;
+      background-color: var(--primary); animation: pulse-bar 2s infinite ease-in-out;
     }
-    .time.next .time-value, .time.next .tag { color: var(--primary); }
+    .time.next .time-value { color: var(--primary); }
     
+    .skeleton { height: 63px; background-color: #e2e8f0; border-radius: var(--radius); animation: skeleton-pulse 1.5s infinite ease-in-out; }
+
+    .empty-state {
+        background-color: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+        padding: 24px; text-align: center; animation: fadeIn 0.5s ease;
+    }
+    .empty-state .icon { color: var(--primary); margin-bottom: 8px; }
+    .empty-state p { margin: 0; font-size: 16px; font-weight: 500; color: var(--text-muted); }
+    .empty-state .next-day-time { font-weight: 700; color: var(--text); }
+
     section { margin-top: 64px; animation: fadeIn .6s .2s ease both; }
     section h2 { font-size: 24px; font-weight: 700; margin: 0 0 24px; text-align: center; letter-spacing: -0.5px; }
 
@@ -133,14 +108,10 @@
     footer { margin-top: 64px; border-top: 1px solid var(--border); color: var(--text-muted); text-align: center; padding: 32px 24px; font-size: 14px; }
   </style>
 </head>
-<body data-theme="light">
+<body>
   <header>
     <div class="wrap head">
       <div class="brand"><span class="brand-badge">H</span> Haskoop</div>
-      <button class="theme-toggle" id="themeToggle" title="Temayı Değiştir">
-        <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-      </button>
     </div>
   </header>
 
@@ -148,10 +119,23 @@
     <div class="container">
       <div class="page-title">
         <h1>Yeşilovacık ⇄ Silifke Sefer Saatleri</h1>
-        <p id="today"></p>
+        <p id="today">27 Ağustos 2025 Çarşamba</p>
       </div>
 
-      <div class="two-col" id="twoCol"></div>
+      <div class="two-col" id="twoCol">
+        <div class="col" id="col-yesilovacik">
+          <div class="col-head">Yeşilovacık Kalkış</div>
+          <ul class="time-list">
+             <li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>
+          </ul>
+        </div>
+        <div class="col" id="col-silifke">
+          <div class="col-head">Silifke Kalkış</div>
+          <ul class="time-list">
+            <li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>
+          </ul>
+        </div>
+      </div>
       
       <section id="ucretler">
         <h2>Ücret Tarifesi</h2>
@@ -165,7 +149,7 @@
                 <h3><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>İletişim Bilgileri</h3>
                 <ul class="contact-list">
                     <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div><div><b>Durak Sabit Hat:</b><br><a href="tel:03247475252">0324 747 5252</a></div></li>
-                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div><b>Adres:</b><br>Yeşilovacık Mah, Akdeniz Cad. Jandarma Karakolu Yanı<br><a href="https://www.google.com/maps/search/?api=1&query=Yeşilovacık+Jandarma+Karakol+Komutanlığı" target="_blank">Haritada Göster →</a></div></li>
+                    <li><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div><b>Adres:</b><br>Yeşilovacık Mah, Akdeniz Cad. Jandarma Karakolu Yanı<br><a href="http://googleusercontent.com/maps.google.com/2" target="_blank">Haritada Göster →</a></div></li>
                 </ul>
             </div>
             <div class="contact-card">
@@ -191,42 +175,63 @@
       };
       const fares = [ { route: 'Hırmanlı / Mesa ⇄ Silifke', tam: 120, ogrenci: 110 }, { route: 'Yeşilovacık ⇄ Silifke', tam: 100, ogrenci: 90 }, { route: 'Akdere ⇄ Silifke', tam: 90, ogrenci: 80 }, { route: 'Boğsak ⇄ Silifke', tam: 70, ogrenci: 60 }, { route: 'Boğsak ⇄ Taşucu', tam: 50, ogrenci: 40 } ];
       
-      const twoCol = document.getElementById('twoCol');
+      const colYesilovacik = document.querySelector('#col-yesilovacik .time-list');
+      const colSilifke = document.querySelector('#col-silifke .time-list');
       const fareGrid = document.getElementById('fareGrid');
-      const themeToggle = document.getElementById('themeToggle');
 
       function renderTimetables() {
-        twoCol.innerHTML = '';
-        buildColumn(timetable.yesilovacik);
-        buildColumn(timetable.silifke);
+        buildColumn(timetable.yesilovacik, colYesilovacik);
+        buildColumn(timetable.silifke, colSilifke);
         applyHighlights();
       }
 
-      function buildColumn(data) {
-        const col = document.createElement('div');
-        col.className = 'col';
-        const timesHtml = data.times.map(({t, badge}) => `
-          <li class="time">
+      function buildColumn(data, targetElement) {
+        targetElement.innerHTML = ''; // Önce iskeleti temizle
+        const timesHtml = data.times.map(({t, badge}, index) => `
+          <li class="time" style="animation-delay: ${index * 50}ms">
             <span class="time-value">${t}</span>
             ${badge ? '<div class="tag"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg>Direkt</div>' : ''}
           </li>
         `).join('');
-        col.innerHTML = `<div class="col-head">${data.title}</div><ul class="time-list">${timesHtml}</ul>`;
-        twoCol.appendChild(col);
+        targetElement.innerHTML = timesHtml;
       }
 
       function applyHighlights() {
-        const currentMinutes = new Date().getHours() * 60 + new Date().getMinutes();
-        let nextEl = null, minDiff = Infinity;
-        
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        let nextEl = null;
+        let minDiff = Infinity;
+        let firstTripToday = null;
+        let firstTripTime = Infinity;
+
         document.querySelectorAll('.time').forEach(el => {
             el.classList.remove('next');
             const [h, m] = el.querySelector('.time-value').textContent.match(/(\d+):(\d+)/).slice(1).map(Number);
-            const diff = (h * 60 + m) - currentMinutes;
-            if (diff >= 0 && diff < minDiff) { minDiff = diff; nextEl = el; }
+            const timeInMinutes = h * 60 + m;
+            
+            if (timeInMinutes < firstTripTime) {
+                firstTripTime = timeInMinutes;
+                firstTripToday = el.querySelector('.time-value').textContent;
+            }
+
+            const diff = timeInMinutes - currentMinutes;
+            if (diff >= 0 && diff < minDiff) {
+                minDiff = diff;
+                nextEl = el;
+            }
         });
 
-        if (nextEl && minDiff <= 120) nextEl.classList.add('next');
+        if (nextEl && minDiff <= 120) {
+            nextEl.classList.add('next');
+        } else if (!nextEl) {
+            // Günün tüm seferleri bitti.
+            const emptyStateHTML = `<div class="empty-state">
+                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><moon x="12" y="12" r="10"></moon><path d="M12 2L12 6"></path><path d="M12 18L12 22"></path><path d="M4.92993 4.92993L7.75993 7.75993"></path><path d="M16.2402 16.2402L19.0702 19.0702"></path><path d="M2 12L6 12"></path><path d="M18 12L22 12"></path><path d="M4.92993 19.0702L7.75993 16.2402"></path><path d="M16.2402 7.75993L19.0702 4.92993"></path></svg></div>
+                <p>Bugünlük seferler tamamlanmıştır.<br>Yarın ilk sefer: <span class="next-day-time">${timetable.yesilovacik.times[0].t}</span></p>
+            </div>`;
+            colYesilovacik.innerHTML = emptyStateHTML;
+            colSilifke.innerHTML = emptyStateHTML;
+        }
       }
       
       function buildFares() {
@@ -241,28 +246,17 @@
         `).join('');
       }
 
-      function setTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-      }
-
-      themeToggle.addEventListener('click', () => {
-        setTheme(document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-      });
-
       function init() {
-        const dOpts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        const dOpts = { weekday: 'long', day: 'numeric', month: 'long' };
         document.getElementById('today').textContent = new Intl.DateTimeFormat('tr-TR', dOpts).format(new Date());
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (savedTheme) { setTheme(savedTheme); } 
-        else if (systemPrefersDark) { setTheme('dark'); }
-
         buildFares();
-        renderTimetables();
-        setInterval(applyHighlights, 30 * 1000);
+        // İskelet animasyonunu göstermek için küçük bir gecikme sonrası gerçek veriyi yükle
+        setTimeout(() => {
+          renderTimetables();
+          setInterval(applyHighlights, 30 * 1000);
+        }, 500);
       }
       init();
     });
